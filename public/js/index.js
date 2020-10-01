@@ -16,11 +16,14 @@ const closeModal = () => {
 };
 
 window.addEventListener("scroll", () => {
-  console.log('Client is scrolling')
-  if (window.scrollY > window.innerHeight / 3 && !isOpened) {
+  if (window.scrollY > window.innerHeight / 2 && !isOpened) {
     isOpened = true;
     scrollDown.style.display = "none";
     openModal();
+  }
+  else if(window.scrollY < window.innerHeight / 3){
+    isOpened = false;
+    scrollDown.style.display = "flex";
   }
 });
 
