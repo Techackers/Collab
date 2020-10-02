@@ -1,8 +1,10 @@
 const express= require('express');
 const path = require('path');
-const http = require('http');
 const app = express();
-const server = http.createServer(app);
+const bodyParser = require('body-parser');
+
+require('dotenv').config();
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('./public'));
 
@@ -10,13 +12,8 @@ app.set('view engine','ejs');
 
 const port = process.env.PORT || 4000;
 
-app.get('/' , (req , res) => res.render('index'));
+app.use('/' , require('./routes/chatRoute'));
 
-app.post('/' , (req , res) => {
-    console.log(req.body);
-    res.render('chat');
-});
-
-server.listen(port,() =>{
+const server = app.listen(port,() => {
     console.log('Server is running on port', port);
 });
