@@ -20,19 +20,21 @@
             <div class="modal-left">
                 <h1 class="modal-title">Welcome to Talky!</h1>
                 <p class="modal-desc">Chat in the language that pleases you ! Dropping the barrier of languages.</p>
-                <div class="input-block">
-                <label for="name" class="input-label">Name</label>
-                <input type="name" name="name" id="name" placeholder="Name">
-                </div>
-                <div class="input-block">
-                <label for="Preffered Language" class="input-label">Preffered Language</label>
-                <input type="Preffered Language" name="Preffered Language" id="Preffered Language" placeholder="Preffered Language">
-                </div>
-                <div class="modal-buttons">
-                <a href="" class="">Make it permanent?</a>
-                <button class="input-button">Join Room</button>
-                </div>
-                <p class="sign-up">Wanna create a Room ? <a href="#">Create now</a></p>
+                <form method="POST" action="/">
+                    <div class="input-block">
+                        <label for="name" class="input-label">Name</label>
+                        <input type="text" name="username" id="username" placeholder="Name" value="Pranjul">
+                    </div>
+                    <div class="input-block">
+                        <label for="Preferred Language" class="input-label">Preferred Language</label>
+                        <input type="text" name="language" id="Preferred Language" placeholder="Preferred Language" value="English">
+                    </div>
+                    <div class="modal-buttons">
+                        <a href="" class="">Make it permanent?</a>
+                        <input type="submit" class="input-button" value="Join Room">
+                    </div>
+                    <p class="sign-up">Wanna create a Room ? <a href="#">Create now</a></p>
+                </form>
             </div>
             <!---
             <div class="modal-right">
