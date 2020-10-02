@@ -24,6 +24,8 @@
     "http": "0.0.1-security",
     "moment": "^2.29.0",
     "nodemon": "^2.0.4",
+    "qs": "^6.9.4",
+    "query-string": "^6.13.5",
     "socket.io": "^2.3.0"
   }
 }
