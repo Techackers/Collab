@@ -1,7 +1,6 @@
 var socket = io.connect("http://localhost:4000/");
 
 var userlist = document.getElementById("userlist");
-var roomlist = document.getElementById("roomlist");
 var message = document.getElementById("message");
 var sendMessageBtn = document.getElementById("send");
 var createRoomBtn = document.getElementById("create-room");
@@ -36,4 +35,13 @@ socket.on('updateChat' , (info , message) => {
       messages.innerHTML += "<p><span><strong>" + info + ": </strong></span>" + message + "</p>";
     }
     chatDisplay.scrollTop = chatDisplay.scrollHeight;
+});
+
+socket.on("updateUsers" , (users , room) => {
+    userlist.innerHTML = "";
+    for (var user in users) {
+        if(users[user][2] == room) {
+            userlist.innerHTML += "<li>" + users[user][0] + "</li>";
+        }
+    }
 });

@@ -44,9 +44,24 @@ io.on('connection' , (socket) => {
         socket
             .to(users[socket.id][2])
             .broadcast.emit("updateChat" , "INFO" , users[socket.id][0] + " has joined the chat.");
+        io.sockets
+            .to(users[socket.id][2])
+            .emit('updateUsers' , users , room);
     });
 
     socket.on('sendMessage' , (message) => {
         io.to(users[socket.id][2]).emit('updateChat' , users[socket.id][0] , message);
+    })
+
+    socket.on("disconnect" , () => {
+        var room = users[socket.id][2];
+        socket
+            .to(room)
+            .broadcast.emit("updateChat" , "INFO" , users[socket.id][0] + " has left the chat.");
+        console.log("Dsiconnected user Room" , room);
+        delete users[socket.id];
+        socket
+            .to(room)
+            .broadcast.emit('updateUsers' , users , room);
     })
 })
