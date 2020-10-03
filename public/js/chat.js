@@ -20,6 +20,10 @@ sendMessageBtn.addEventListener("click" , () => {
     message.value = "";
 });
 
+message.addEventListener("keyup" , function(event) {
+    if(event.keyCode == 13) sendMessageBtn.click();
+});
+
 socket.on("connect" , () => {
     socket.emit("createUser" , {username , language , room});
 });
@@ -31,5 +35,5 @@ socket.on('updateChat' , (info , message) => {
     else {
       messages.innerHTML += "<p><span><strong>" + info + ": </strong></span>" + message + "</p>";
     }
-    
+    chatDisplay.scrollTop = chatDisplay.scrollHeight;
 });

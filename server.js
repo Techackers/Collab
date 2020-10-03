@@ -15,11 +15,7 @@ app.set('view engine','ejs');
 const port = process.env.PORT || 4000;
 
 app.get('/' , (req , res) => res.render('index'));
-app.get('/chatRoom' , (req , res) => {
-    const {username , language , room} = req.body;
-    console.log("Request data ", req.body);
-    res.render('chat');
-})
+app.get('/chatRoom' , (req , res) => res.render('chat'));
 
 const server = app.listen(port,() => {
     console.log('Server is running on port', port);
@@ -44,7 +40,10 @@ io.on('connection' , (socket) => {
         const id = socket.id;
         users[id] = user;
         socket.join(room);
-        io.to(users[socket.id][2]).emit("updateChat" , "INFO" , "You have joined room: " + room);
+        socket.emit("updateChat" , "INFO" , "You have joined room: " + room);
+        socket
+            .to(users[socket.id][2])
+            .broadcast.emit("updateChat" , "INFO" , users[socket.id][0] + " has joined the chat.");
     });
 
     socket.on('sendMessage' , (message) => {
